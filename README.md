@@ -1,23 +1,37 @@
-#LAB 23 - JNI Protection (Anti-Debug) - Native
-Projet Android Java + C++ (NDK) qui illustre comment structurer un module JNI defensif:
+LAB 23 – Protection JNI : Détection de Débogage (Anti-Debugging)
 
-expose une API JNI claire (booleens + rapport texte)
-journalise cote natif (Logcat)
-adapte l'interface Android selon l'etat detecte
-Note importante (TP defensif)
-Ce TP est educatif. Il montre comment detecter des conditions anormales de maniere raisonnable, mais ne cherche pas a fournir des techniques d'evasion avancees.
+Ce projet Android, développé en Java et C++ à l’aide du NDK, présente la mise en place d’un module JNI destiné à renforcer la sécurité de l’application face aux tentatives de débogage.
 
-Prerequis
-Android Studio
-NDK + CMake installes (SDK Manager)
-Lancer
-Ouvrir le dossier dans Android Studio, Sync, Run.
+Objectifs
 
-API JNI
-NativeDefense.isDebuggerDetected(context) -> boolean
-NativeDefense.getSecurityReport(context) -> String
-Le code Java complete les checks "safe" (debuggable build, debugger connecte). Le natif sert a:
+* Concevoir une interface JNI simple et cohérente basée sur des retours booléens et des rapports textuels.
+* Enregistrer les événements de sécurité côté natif via Logcat.
+* Adapter dynamiquement le comportement de l’interface Android en fonction des anomalies détectées.
 
-centraliser l'etat
-logger cote natif
-remonter un rapport
+Contexte pédagogique
+
+Ce laboratoire a une vocation exclusivement éducative. Son objectif est de démontrer comment identifier certaines situations potentiellement suspectes de manière raisonnable et transparente, sans recourir à des mécanismes avancés d’évasion ou de contournement.
+
+Prérequis
+
+* Android Studio installé.
+* Android NDK et CMake configurés depuis le SDK Manager.
+
+Exécution du projet
+
+1. Ouvrir le projet dans Android Studio.
+2. Effectuer la synchronisation des dépendances.
+3. Compiler et lancer l’application sur un appareil ou un émulateur.
+
+Interface JNI exposée
+
+* NativeDefense.isDebuggerDetected(context) → retourne un booléen indiquant la présence éventuelle d’un débogueur.
+* NativeDefense.getSecurityReport(context) → génère un rapport textuel détaillant l’état de sécurité observé.
+
+Répartition des responsabilités
+
+Les vérifications de base, telles que la détection d’un build débogable ou d’un débogueur connecté, sont réalisées côté Java. Le composant natif a pour rôle de :
+
+* centraliser les informations liées à la sécurité ;
+* produire des journaux d’événements dans Logcat ;
+* fournir un rapport synthétique exploitable par l’application.
